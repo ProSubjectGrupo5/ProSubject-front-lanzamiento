@@ -205,6 +205,19 @@ export class CreacionEspacioComponent implements OnInit {
     }, {validators: validarHoras}))
   }
 
+  copiarHorario(index){
+    const horario = this.horarios.value[index];
+    this.horarios.insert(index, this.fb.group({
+      dia: new FormControl(horario.dia, Validators.required),
+      horaInicio: new FormControl(horario.horaInicio, [Validators.required, Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+      horaFin: new FormControl(horario.horaFin, [Validators.required, Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]),
+      capacidad: new FormControl(horario.capacidad, [Validators.required, Validators.min(1), Validators.max(50), Validators.pattern("^[0-9]+$")]),
+      fechaInicio: new FormControl(horario.fechaInicio, [Validators.required, validarFecha])
+    }, {validators: validarHoras}))
+
+    
+  }
+
   deleteHorario(index){
     (<FormArray>this.form.get('horarios')).removeAt(index);
   }

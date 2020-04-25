@@ -135,7 +135,7 @@
                     <div class="col-md-6" >
                         HORARIO
                         <hr>
-                        <div formArrayName="horarios" *ngFor="let hor of form.get('horarios')?.controls; let i=index;">
+                        <div formArrayName="horarios" class="mt-3" *ngFor="let hor of form.get('horarios')?.controls; let i=index;">
                             <div class="row" [formGroupName]="i">
 
                                 <div class="form-group col-md-3">
@@ -235,19 +235,24 @@
 
                             </div>
 
-                            <div class="alert alert-danger" *ngIf="form.get('horarios')?.controls[i].invalid && i != 0">
+                            <div class="alert alert-danger" *ngIf="(form.get('horarios')?.controls[i].get('dia').value == ''
+                            && form.get('horarios')?.controls[i].get('horaInicio').value == '' 
+                            && form.get('horarios')?.controls[i].get('horaFin').value == ''
+                            && form.get('horarios')?.controls[i].get('capacidad').value == ''
+                            && form.get('horarios')?.controls[i].get('fechaInicio').value == '')
+                            && i != 0">
                                 Debe rellenar el nuevo horario o eliminarlo                            
                             </div>
 
-
-                            <div *ngIf="i != 0">
-                            <button type="button" title="Eliminar horario" (click)="deleteHorario(i)"><i class="fas fa-trash-alt"></i></button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary mr-1" title="Añadir nuevo horario" (click)="addNuevoHorario()">Añadir nuevo horario</button>
+                                <button type="button" class="btn btn-primary mr-1 ml-1" title="Copiar horario" (click)="copiarHorario(i)" [disabled]="form.get('horarios')?.controls[i].invalid">Copiar horario</button>
+                                <div *ngIf="i != 0">
+                                    <button type="button" class="btn btn-danger ml-1" title="Eliminar horario" (click)="deleteHorario(i)">Borrar horario</button>
+                                </div>
                             </div>
-
-
-
+                        
                         </div>
-                        <button type="button" class="btn btn-primary" title="Añadir nuevo horario" (click)="addNuevoHorario()">Añadir nuevo horario</button>
                     </div>
                 </div>
 
