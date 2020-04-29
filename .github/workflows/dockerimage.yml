@@ -26,3 +26,4 @@ jobs:
         heroku container:login
         heroku container:push web --app prosubject-lanzamiento
         heroku container:release web --app prosubject-lanzamiento
+        
