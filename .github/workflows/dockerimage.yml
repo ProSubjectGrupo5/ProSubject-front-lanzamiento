@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag prosubject:prod
+      run: docker build . --file Dockerfile --tag prosubject-lanzamiento:prod
     - name: push to heroku
       env : 
         HEROKU_REGISTRY_URL: registry.heroku.com
@@ -26,4 +26,3 @@ jobs:
         heroku container:login
         heroku container:push web --app prosubject-lanzamiento
         heroku container:release web --app prosubject-lanzamiento
-        
