@@ -3,97 +3,101 @@
         <div class="col-md-12">
             <form [formGroup]="form" (ngSubmit) = "onSubmit()">
 
-                <div class="row">
-                    <div class="col-md-5">
-
-                        <div class="form-group">
-                            <label>Universidad*</label>
-                            <select class="form-control" formControlName="universidad" [ngClass]="{'is-invalid': form.get('universidad').touched && form.get('universidad').invalid}">
-                                <option value="">------</option>
-                                <option *ngFor="let valor of universidades" [value]="valor.nombre">{{valor.nombre}}</option>
-                            </select>
-                            <div class="alert alert-danger" *ngIf="form.get('universidad').touched && form.get('universidad').hasError('required')">
-                                Debes introducir una universidad
-                            </div>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label>Universidad*</label>
+                        <select class="form-control" formControlName="universidad" [ngClass]="{'is-invalid': form.get('universidad').touched && form.get('universidad').invalid}">
+                            <option value="">------</option>
+                            <option *ngFor="let valor of universidades" [value]="valor.nombre">{{valor.nombre}}</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="form.get('universidad').touched && form.get('universidad').hasError('required')">
+                            Debes introducir una universidad
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label>Facultades*</label>
-                            <select class="form-control" formControlName="facultades" [ngClass]="{'is-invalid': form.get('facultades').touched && form.get('facultades').invalid}">
-                                <option value="">------</option>
-                                <option *ngFor="let valor of facultades" [value]="valor.nombre">{{valor.nombre}}</option>
-                            </select>
-                            <div class="alert alert-danger" *ngIf="form.get('facultades').touched && form.get('facultades').hasError('required')">
-                                Debes introducir una facultad
-                            </div>
+                    <div class="col-md-4">
+                        <label>Facultades*</label>
+                        <select class="form-control" formControlName="facultades" [ngClass]="{'is-invalid': form.get('facultades').touched && form.get('facultades').invalid}">
+                            <option value="">------</option>
+                            <option *ngFor="let valor of facultades" [value]="valor.nombre">{{valor.nombre}}</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="form.get('facultades').touched && form.get('facultades').hasError('required')">
+                            Debes introducir una facultad
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label>Grado*</label>
-                            <select class="form-control" formControlName="grado" [ngClass]="{'is-invalid': form.get('grado').touched && form.get('grado').invalid}">
-                                <option value="">------</option>
-                                <option *ngFor="let valor of grados" [value]="valor.nombre">{{valor.nombre}}</option>
-                            </select>
-                            <div class="alert alert-danger" *ngIf="form.get('grado').touched && form.get('grado').hasError('required')">
-                                Debes introducir un grado
-                            </div>
+                    <div class="col-md-4">
+                        <label>Grado*</label>
+                        <select class="form-control" formControlName="grado" [ngClass]="{'is-invalid': form.get('grado').touched && form.get('grado').invalid}">
+                            <option value="">------</option>
+                            <option *ngFor="let valor of grados" [value]="valor.nombre">{{valor.nombre}}</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="form.get('grado').touched && form.get('grado').hasError('required')">
+                            Debes introducir un grado
                         </div>
-
-                        <div class="form-group">
-                            <label>Curso*</label>
-                            <select class="form-control" formControlName="curso" [ngClass]="{'is-invalid': form.get('curso').touched && form.get('curso').invalid}">
-                                <option value="">------</option>
-                                <option *ngFor="let valor of cursos" [value]="valor.nombre">{{valor.nombre}}</option>
-                            </select>
-                            <div class="alert alert-danger" *ngIf="form.get('curso').touched && form.get('curso').hasError('required')">
-                                Debes introducir un curso
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Asignatura*</label>
-                            <select class="form-control" formControlName="asignatura" [ngClass]="{'is-invalid': form.get('asignatura').touched && form.get('asignatura').invalid}">
-                                <option value="">------</option>
-                                <option *ngFor="let valor of asignaturas" [value]="valor.id">{{valor.nombre}}</option>
-                            </select>
-                            <div class="alert alert-danger" *ngIf="form.get('asignatura').touched && form.get('asignatura').hasError('required')">
-                                Debes introducir una asignatura
-                            </div>
-                        </div>
-        
-                        <div class="form-group">
-                            <label>Precio*</label>
-                            <input matInput type="text" name="precio" formControlName="precio" 
-                            placeholder="Introduce el precio por hora..." class="form-control" [ngClass]="{'is-invalid': form.get('precio').touched && form.get('precio').invalid}">
-                            <div class="alert alert-danger" *ngIf="form.get('precio').touched && form.get('precio').hasError('required')">
-                                El precio es requerido
-                            </div>
-                            <div class="alert alert-danger" *ngIf="form.get('precio').touched && (form.get('precio').hasError('min') || form.get('precio').hasError('max'))">
-                                El precio debe ser mayor que 0 y menor que 30€
-                            </div>
-                            <div class="alert alert-danger" *ngIf="form.get('precio').touched && form.get('precio').hasError('pattern') && !form.get('precio').hasError('min') && !form.get('precio').hasError('max')">
-                                Introduce un precio válido sin el símbolo "€"
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label><b>¿Deseas publicar este espacio?*</b></label><br>
-                            <input type="radio" id="draftMode" name="draftMode" [value]="1" formControlName="draftMode">
-                            <label for="draftMode">Guardar en modo borrador</label>
-                            <input type="radio" id="noDraftMode" name="draftMode" [value]="0" formControlName="draftMode"> 
-                            <label for="noDraftMode">Publicar</label>
-                        </div>
-
-                        
                     </div>
                 </div>
 
-                <button class="btn btn-primary btn-block col-md-2" [disabled]="form.invalid">
-                    Guardar
-                </button>
-                <button class="btn btn-primary btn-block col-md-2" (click)="volverEspaciosEditables()">
-                    Cancelar
-                </button>
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <label>Curso*</label>
+                        <select class="form-control" formControlName="curso" [ngClass]="{'is-invalid': form.get('curso').touched && form.get('curso').invalid}">
+                            <option value="">------</option>
+                            <option *ngFor="let valor of cursos" [value]="valor.nombre">{{valor.nombre}}</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="form.get('curso').touched && form.get('curso').hasError('required')">
+                            Debes introducir un curso
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Asignatura*</label>
+                        <select class="form-control" formControlName="asignatura" [ngClass]="{'is-invalid': form.get('asignatura').touched && form.get('asignatura').invalid}">
+                            <option value="">------</option>
+                            <option *ngFor="let valor of asignaturas" [value]="valor.id">{{valor.nombre}}</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="form.get('asignatura').touched && form.get('asignatura').hasError('required')">
+                            Debes introducir una asignatura
+                        </div>
+                    </div>
+    
+                    <div class="col-md-2">
+                        <label>Precio*</label>
+                        <input matInput type="text" name="precio" formControlName="precio" 
+                        placeholder="Introduce el precio por hora..." class="form-control" [ngClass]="{'is-invalid': form.get('precio').touched && form.get('precio').invalid}">
+                        <div class="alert alert-danger" *ngIf="form.get('precio').touched && form.get('precio').hasError('required')">
+                            El precio es requerido
+                        </div>
+                        <div class="alert alert-danger" *ngIf="form.get('precio').touched && (form.get('precio').hasError('min') || form.get('precio').hasError('max'))">
+                            El precio debe ser mayor que 0 y menor que 30€
+                        </div>
+                        <div class="alert alert-danger" *ngIf="form.get('precio').touched && form.get('precio').hasError('pattern') && !form.get('precio').hasError('min') && !form.get('precio').hasError('max')">
+                            Introduce un precio válido sin el símbolo "€"
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label><b>¿Deseas publicar este espacio?*</b></label><br>
+                        <input type="radio" id="draftMode" name="draftMode" [value]="1" formControlName="draftMode">
+                        <label for="draftMode">Guardar en modo borrador</label>
+                        <input type="radio" id="noDraftMode" name="draftMode" [value]="0" formControlName="draftMode"> 
+                        <label for="noDraftMode">Publicar</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-primary col-12 col-md-2 mr-1 mb-1" [disabled]="form.invalid">
+                            Guardar
+                        </button>
+                        <button class="btn btn-primary col-12 col-md-2 mb-1" (click)="volverEspaciosEditables()">
+                            Cancelar
+                        </button>
+                    </div>
+                    
+                </div>
+
+                
 
             </form>
         </div>
