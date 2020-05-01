@@ -64,7 +64,7 @@ const pagesRoutes: Routes = [
             {path:'crear-horarios/:id', component: CrearHorarioComponent, data:{titulo: 'Crear horario'}, canActivate: [ProfesorGuard]},
             {path:'editar-espacio/:id', component: EditarEspaciosComponent, data:{titulo: 'Editar espacio'}, canActivate: [ProfesorGuard]},
             {path:'espacios-alumno', component: EspaciosAlumnoComponent, data:{titulo: 'Mis clases'}, canActivate: [AlumnoGuard]},
-            {path:'horarios/:id', component: HorariosComponent, data: {titulo: 'Horarios'}, canActivate: [AlumnoGuard]},
+            {path:'horarios/:id', component: HorariosComponent, data: {titulo: 'Horarios'}, canActivate: [AlumnoAnonimoGuard]},
             {path:'nuevo-admin', component: NuevoAdminComponent, data: {titulo: 'Crear administrador'}, canActivate: [AdministradorGuard]},
             {path:'foro/:id', component: ForoComponent, data: {titulo: 'Foro'}, canActivate: [AlumnoProfesorGuard]},
             {path:'validar-profesor', component: ValidarProfesorComponent, data:{titulo: 'Validar profesor'}, canActivate: [AdministradorGuard]},

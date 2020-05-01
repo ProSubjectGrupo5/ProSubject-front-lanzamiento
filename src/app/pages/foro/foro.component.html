@@ -12,7 +12,7 @@
 
         <div class="row">
 
-            <div *ngIf="respuestas.length != 0" class="col-6 left" style="overflow-y: scroll; height: 360px;">
+            <div *ngIf="respuestas.length != 0" class="col-12 col-md-6 left" style="overflow-y: scroll; height: 360px;">
                 <div *ngFor="let respuesta of respuestas;"class="col-12">
 
                     <div class="card">
@@ -30,13 +30,13 @@
                 </div>
             </div>
 
-            <div *ngIf="respuestas.length == 0" class="col-6" style="overflow-y: scroll; height: 360px;"> 
+            <div *ngIf="respuestas.length == 0" class="col-12 col-md-6" style="overflow-y: scroll; height: 360px;"> 
                 El foro no contiene ningún mensaje.
             </div>
 
             
 
-            <div class="col-6 right">
+            <div class="col-12 col-md-6 right">
 
                 <form novalidate [formGroup]="form" (ngSubmit)="insertar()">
 

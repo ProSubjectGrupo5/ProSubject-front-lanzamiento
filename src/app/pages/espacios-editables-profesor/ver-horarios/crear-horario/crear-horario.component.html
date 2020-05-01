@@ -2,91 +2,104 @@
     <div class="row">
         <div class="col-md-12">
             <form [formGroup]="form" (ngSubmit) = "onSubmit()">
+
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label>Día*</label>
+                        <select class="form-control" formControlName="dia" [ngClass]="{'is-invalid': form.get('dia').touched && form.get('dia').invalid}">
+                            <option value="">------</option>
+                            <option *ngFor="let dia of diasSemana" [value]="dia">{{dia}}</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="form.get('dia').touched && form.get('dia').hasError('required')">
+                            El día es requerido
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Hora inicio*</label>
+                            <input type="text" formControlName="horaInicio" class="form-control" 
+                            name="horaInicio" placeholder="HH:mm" [ngClass]="{'is-invalid': form.get('horaInicio').touched && form.get('horaInicio').invalid}">
+                            <div class="alert alert-danger" *ngIf="form.get('horaInicio').touched && form.get('horaInicio').hasError('required')">
+                                La hora de inicio es requerida
+                            </div>
+    
+                            <div class="alert alert-danger" *ngIf="form.get('horaInicio').touched && form.get('horaInicio').hasError('pattern')">
+                                Introduce una hora de inicio valida
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Hora fin*</label>
+                            <input type="text" formControlName="horaFin" class="form-control" 
+                            name="horaFin" placeholder="HH:mm" [ngClass]="{'is-invalid': form.get('horaFin').touched && form.get('horaFin').invalid}">
+                            <div class="alert alert-danger" *ngIf="form.get('horaFin').touched && form.get('horaFin').hasError('required')">
+                                La hora de fin es requerida
+                            </div>
+    
+                            <div class="alert alert-danger" *ngIf="form.get('horaFin').touched && form.get('horaFin').hasError('pattern')">
+                                Introduce una hora de fin valida
+                            </div>
+                            <div class="alert alert-danger" *ngIf="form.touched && form.hasError('noValidHour')">
+                                La fecha de fin debe ser mayor que la fecha de inicio
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Capacidad*</label>
+                            <input matInput type="text" name="capacidad" formControlName="capacidad" 
+                            class="form-control" [ngClass]="{'is-invalid': form.get('capacidad').touched && form.get('capacidad').invalid}">
+                            <div class="alert alert-danger" *ngIf="form.get('capacidad').touched && form.get('capacidad').hasError('required')">
+                                La capacidad es requerida
+                            </div>
+    
+                            <div class="alert alert-danger" *ngIf="form.get('capacidad').touched && form.get('capacidad').hasError('pattern') && !form.get('capacidad').hasError('min')">
+                                Introduce una capacidad válida
+                            </div>
+                            <div class="alert alert-danger" *ngIf="form.get('capacidad').touched && (form.get('capacidad').hasError('min') || form.get('capacidad').hasError('max'))">
+                                La capacidad debe ser mayor que 0 y menor que 50
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Fecha límite de inscripción*</label>
+                            <input matInput type="date" name="fechaInicio" formControlName="fechaInicio" 
+                            class="form-control" [ngClass]="{'is-invalid': form.get('fechaInicio').touched && form.get('fechaInicio').invalid}">
+                            <div class="alert alert-danger" *ngIf="form.get('fechaInicio').touched && form.get('fechaInicio').hasError('required')">
+                                La fecha de inicio es requerida
+                            </div>
+    
+                            <div class="alert alert-danger" *ngIf="form.get('fechaInicio').touched && form.get('fechaInicio').hasError('noValidDate')">
+                                La fecha de inicio debe ser futura
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="form-group col-md-6">
-                    <label>Día*</label>
-                    <select class="form-control" formControlName="dia" [ngClass]="{'is-invalid': form.get('dia').touched && form.get('dia').invalid}">
-                        <option value="">------</option>
-                        <option *ngFor="let dia of diasSemana" [value]="dia">{{dia}}</option>
-                    </select>
-                    <div class="alert alert-danger" *ngIf="form.get('dia').touched && form.get('dia').hasError('required')">
-                        El día es requerido
+               
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-primary col-12 col-md-2 mr-1 mb-1" [disabled]="form.invalid">
+                            Guardar
+                        </button>
+                        <button class="btn btn-primary col-12 col-md-2 mb-1" type="button" (click)="verHorarios(espacioId)">
+                            Cancelar
+                        </button>
                     </div>
                     
                 </div>
-                
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Hora inicio*</label>
-                        <input type="text" formControlName="horaInicio" class="form-control" 
-                        name="horaInicio" placeholder="HH:mm" [ngClass]="{'is-invalid': form.get('horaInicio').touched && form.get('horaInicio').invalid}">
-                        <div class="alert alert-danger" *ngIf="form.get('horaInicio').touched && form.get('horaInicio').hasError('required')">
-                            La hora de inicio es requerida
-                        </div>
 
-                        <div class="alert alert-danger" *ngIf="form.get('horaInicio').touched && form.get('horaInicio').hasError('pattern')">
-                            Introduce una hora de inicio valida
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Hora fin*</label>
-                        <input type="text" formControlName="horaFin" class="form-control" 
-                        name="horaFin" placeholder="HH:mm" [ngClass]="{'is-invalid': form.get('horaFin').touched && form.get('horaFin').invalid}">
-                        <div class="alert alert-danger" *ngIf="form.get('horaFin').touched && form.get('horaFin').hasError('required')">
-                            La hora de fin es requerida
-                        </div>
-
-                        <div class="alert alert-danger" *ngIf="form.get('horaFin').touched && form.get('horaFin').hasError('pattern')">
-                            Introduce una hora de fin valida
-                        </div>
-                        <div class="alert alert-danger" *ngIf="form.touched && form.hasError('noValidHour')">
-                            La fecha de fin debe ser mayor que la fecha de inicio
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Capacidad*</label>
-                        <input matInput type="text" name="capacidad" formControlName="capacidad" 
-                        class="form-control" [ngClass]="{'is-invalid': form.get('capacidad').touched && form.get('capacidad').invalid}">
-                        <div class="alert alert-danger" *ngIf="form.get('capacidad').touched && form.get('capacidad').hasError('required')">
-                            La capacidad es requerida
-                        </div>
-
-                        <div class="alert alert-danger" *ngIf="form.get('capacidad').touched && form.get('capacidad').hasError('pattern') && !form.get('capacidad').hasError('min')">
-                            Introduce una capacidad válida
-                        </div>
-                        <div class="alert alert-danger" *ngIf="form.get('capacidad').touched && (form.get('capacidad').hasError('min') || form.get('capacidad').hasError('max'))">
-                            La capacidad debe ser mayor que 0 y menor que 50
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Fecha límite de inscripción*</label>
-                        <input matInput type="date" name="fechaInicio" formControlName="fechaInicio" 
-                        class="form-control" [ngClass]="{'is-invalid': form.get('fechaInicio').touched && form.get('fechaInicio').invalid}">
-                        <div class="alert alert-danger" *ngIf="form.get('fechaInicio').touched && form.get('fechaInicio').hasError('required')">
-                            La fecha de inicio es requerida
-                        </div>
-
-                        <div class="alert alert-danger" *ngIf="form.get('fechaInicio').touched && form.get('fechaInicio').hasError('noValidDate')">
-                            La fecha de inicio debe ser futura
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-primary btn-block col-md-2" [disabled]="form.invalid">
-                    Guardar
-                </button>
-                <button class="btn btn-primary btn-block col-md-2" type="button" (click)="verHorarios(espacioId)">
-                    Cancelar
-                </button>
+              
             </form>
             </div>
     </div>

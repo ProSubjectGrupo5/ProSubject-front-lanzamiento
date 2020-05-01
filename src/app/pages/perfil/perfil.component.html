@@ -1,6 +1,6 @@
 <div *ngIf="!editarPerfil" class="container">
     <div class="d-flex justify-content-center row">
-        <div class="col-12 col-md-6">
+        <div class="col-12">
             <div *ngIf="mostrarMensajeActualizarPerfil" class="alert alert-success text-center" role="alert">
                 Su perfil ha sido actualizado con éxito.
             </div>
@@ -31,6 +31,9 @@
                                 <p>{{perfil.grado.nombre}}</p>
                             </div>
                         </div>
+   
+                        
+<!--
                         <div class="col-12">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary" (click)="mostrarFormularioEditarPerfil()">Editar</button>
@@ -43,8 +46,18 @@
                                 <button *ngIf="perfil.userAccount.autoridad === 'ALUMNO' || perfil.userAccount.autoridad === 'PROFESOR'" type="button" class="btn btn-primary ml-1" (click)="peticionParaSerOlvidado()">Petición de olvido</button>
                             </div>
                         </div>
+                        -->
                         <!--/col-->
                     </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                                <button type="button" class="btn btn-primary mr-1 col-12 col-md-2 mb-1" (click)="mostrarFormularioEditarPerfil()">Editar</button>
+                                <button *ngIf="perfil.userAccount.autoridad === 'PROFESOR'" type="button" class="btn btn-primary mr-1 col-12 col-md-4 mb-1" (click)="obtenerDatosProfesor(perfil.id, perfil.nombre)">Obtener mis datos</button>               
+                                <button *ngIf="perfil.userAccount.autoridad === 'ALUMNO'" type="button" class="btn btn-primary mr-1 col-12 col-md-4 mb-1" (click)="obtenerDatosAlumno(perfil.id, perfil.nombre)">Obtener mis datos</button>
+                                <button *ngIf="perfil.userAccount.autoridad === 'ALUMNO' || perfil.userAccount.autoridad === 'PROFESOR'" type="button" class="btn btn-primary col-12 col-md-4 mb-1" (click)="peticionParaSerOlvidado()">Petición de olvido</button>                            
+                        </div>
+                    </div>
+                    
                     <!--/row-->
                 </div>
                 <!--/card-block-->

@@ -244,13 +244,21 @@
                                 Debe rellenar el nuevo horario o eliminarlo                            
                             </div>
 
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary mr-1" title="Añadir nuevo horario" (click)="addNuevoHorario()">Añadir nuevo horario</button>
-                                <button type="button" class="btn btn-primary mr-1 ml-1" title="Copiar horario" (click)="copiarHorario(i)" [disabled]="form.get('horarios')?.controls[i].invalid">Copiar horario</button>
-                                <div *ngIf="i != 0">
-                                    <button type="button" class="btn btn-danger ml-1" title="Eliminar horario" (click)="deleteHorario(i)">Borrar horario</button>
+                            <div class="row mt-2"> 
+                                <div class="col-12">
+
+                                    <button type="button" class="btn btn-primary mr-1 col-md-12 mb-1" title="Añadir nuevo horario" (click)="addNuevoHorario()">Añadir nuevo horario</button>
+                                    <button type="button" class="btn btn-primary mr-1 col-md-12 mb-1" title="Copiar horario" (click)="copiarHorario(i)" [disabled]="form.get('horarios')?.controls[i].invalid">Copiar horario</button>
+                                    <div *ngIf="i != 0">
+                                        <button type="button" class="btn btn-danger col-md-12 mb-1" title="Eliminar horario" (click)="deleteHorario(i)">Borrar horario</button>
+                                    </div>
+
                                 </div>
+
                             </div>
+                          
+                               
+                            
                         
                         </div>
                     </div>
