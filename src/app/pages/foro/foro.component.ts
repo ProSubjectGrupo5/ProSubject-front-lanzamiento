@@ -50,7 +50,7 @@ export class ForoComponent implements OnInit, OnDestroy {
             this.client = new Client();
             this.client.webSocketFactory = ()=>{
               //"https://prosubject-backend-v3.herokuapp.com/ws"
-              return new SockJS("https://prosubject-lanzamiento.herokuapp.com/ws");
+              return new SockJS("https://prosubject-backend-lanzamiento.herokuapp.com/ws");
             }
 
             this.client.onConnect = (frame) => {
