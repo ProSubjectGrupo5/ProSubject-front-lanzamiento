@@ -65,6 +65,7 @@ export class CarritoComponent implements OnInit {
     this.carritoService.deleteHorarioCarrito(idCarrito, idHorario, this.perfil.id).subscribe(
       res => {
         this.carrito = this.getCarrito(this.perfil.id);
+        this.perfil = res.alumno;
       })
   }
 
